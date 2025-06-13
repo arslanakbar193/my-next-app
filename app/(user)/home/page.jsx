@@ -1,10 +1,68 @@
+"use client";
+import { useState } from "react";
 import Link from "next/link";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { BsFillFileSpreadsheetFill, BsPersonWorkspace } from "react-icons/bs";
 import { MdOutlineInstallDesktop } from "react-icons/md";
 import { GoProjectSymlink } from "react-icons/go";
 
+
+
 export default function Dashboard() {
+  const [showAttendanceModal, setShowAttendanceModal] = useState(false);
+  const [showWFHModal, setShowWFHModal] = useState(false);
+  const cards = [
+    {
+      icon: <BsFillFileSpreadsheetFill size={40} />,
+      title: "Timesheet",
+      border: "from-blue-400 to-blue-600",
+      href: "/timesheet",
+    },
+    {
+      icon: <MdOutlineInstallDesktop size={40} />,
+      title: "Attendance",
+      border: "from-purple-400 to-pink-500",
+      onClick: () => setShowAttendanceModal(true),
+    },
+    {
+      icon: <GoProjectSymlink size={40} />,
+      title: "Projects",
+      border: "from-orange-400 to-yellow-500",
+      href: "/projects",
+    },
+    {
+      icon: <BsPersonWorkspace size={40} />,
+      title: "WFH Request",
+      border: "from-indigo-500 to-purple-700",
+      onClick: () => setShowWFHModal(true),
+    },
+    {
+      icon: (
+        <svg
+          className="w-10 h-10 text-white"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+          />
+        </svg>
+      ),
+      title: "EOD",
+      border: "from-green-400 to-emerald-600",
+      href: "/eod",
+    },
+    {
+      icon: <RiLogoutCircleRLine size={40} />,
+      title: "Logout",
+      border: "from-red-400 to-rose-600",
+      href: "/",
+    },
+  ];
   return (
     <div
       className="w-full min-h-screen bg-gradient-to-br from-[#1d1d2c] via-[#2a2a40] to-[#1a1a2b] text-white relative overflow-hidden"
@@ -27,27 +85,27 @@ export default function Dashboard() {
               </h1>
               <div className="flex items-center space-x-2">
                 <span
-                  className="rounded-full w-8 h-8 flex items-center justify-center"
+                  className="rounded-full w-9 h-9 flex items-center justify-center"
                   style={{
                     backgroundColor: "#2f190f",
-                    border: "1px solid #0000ff70",
+                    border: "2px solid rgb(242 26 73)",
                   }}
                 >
-                  <span className="text-sm text-white">AA</span>
+                  <span className="text-sm text-white cursor-pointer">AA</span>
                 </span>
                 <span className="text-white">Arslan Akbar</span>
               </div>
             </div>
             <div className="max-w-screen-2xl mx-auto flex justify-between items-center pb-2 px-0">
               <h1 className="text-[0px]">Dashboard</h1>
-              <Link
+              {/* <Link
                 href="/"
                 className="flex items-center text-xs  bg-white rounded p-1 "
                 style={{ color: "#2f190f" }}
               >
                 <RiLogoutCircleRLine className="mr-1" />
                 <span className="text-[10px]">Logout</span>
-              </Link>
+              </Link> */}
             </div>
           </header>
         </main>
@@ -55,90 +113,72 @@ export default function Dashboard() {
         {/* Cards Section at the Bottom */}
         <div className="max-w-screen-2xl mx-auto px-4">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 pb-16">
-            {[
-              {
-                icon: <BsFillFileSpreadsheetFill size={40} />,
-                title: "Timesheet",
-                border: "from-blue-400 to-blue-600",
-                href: "/timesheet",
-              },
-              {
-                icon: <MdOutlineInstallDesktop size={40} />,
-                title: "Attendance",
-                border: "from-purple-400 to-pink-500",
-                href: "/attendance",
-              },
-              {
-                icon: <GoProjectSymlink size={40} />,
-                title: "Projects",
-                border: "from-orange-400 to-yellow-500",
-                href: "/projects",
-              },
-              {
-                icon: <BsPersonWorkspace size={40} />,
-                title: "WFH Request",
-                border: "from-indigo-500 to-purple-700",
-              },
-              {
-                icon: (
-                  <svg
-                    className="w-10 h-10 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-                    />
-                  </svg>
-                ),
-                title: "EOD",
-                border: "from-green-400 to-emerald-600",
-              },
-              {
-                icon: <RiLogoutCircleRLine size={40} />,
-                title: "Logout",
-                border: "from-red-400 to-rose-600",
-                href: "/", // Link destination
-              },
-            ].map((item, i) =>
-              item.href ? (
-                <Link href={item.href} key={i} className="w-full">
-                  <div
-                    style={{ animationDelay: `${i * 0.1}s` }}
-                    className={`rounded-xl p-6 flex flex-col items-center justify-center text-white animate__animated animate__fadeInUp bg-white/5 backdrop-blur-md border border-white/10 shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer`}
-                  >
-                    <div
-                      className={`w-16 h-16 rounded-full bg-gradient-to-tr ${item.border} flex items-center justify-center mb-4`}
-                    >
-                      <div className="w-10 h-10 flex items-center justify-center">
-                        {item.icon}
-                      </div>
-                    </div>
-                    <span className="text-xl font-semibold">{item.title}</span>
-                  </div>
-                </Link>
-              ) : (
-                <div
-                  key={i}
-                  style={{ animationDelay: `${i * 0.1}s` }}
-                  className={`rounded-xl p-6 flex flex-col items-center justify-center text-white animate__animated animate__fadeInUp bg-white/5 backdrop-blur-md border border-white/10 shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer`}
-                >
-                  <div
-                    className={`w-16 h-16 rounded-full bg-gradient-to-tr ${item.border} flex items-center justify-center mb-4`}
-                  >
-                    {item.icon}
-                  </div>
-                  <span className="text-xl font-semibold">{item.title}</span>
+            {cards.map((item, i) => {
+          const content = (
+            <div
+              style={{ animationDelay: `${i * 0.1}s` }}
+              className={`rounded-xl p-6 flex flex-col items-center justify-center text-white animate__animated animate__fadeInUp bg-white/5 backdrop-blur-md border border-white/10 shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer`}
+            >
+              <div
+                className={`w-16 h-16 rounded-full bg-gradient-to-tr ${item.border} flex items-center justify-center mb-4`}
+              >
+                <div className="w-10 h-10 flex items-center justify-center">
+                  {item.icon}
                 </div>
-              )
-            )}
+              </div>
+              <span className="text-xl font-semibold">{item.title}</span>
+            </div>
+          );
+
+          if (item.href) {
+            return (
+              <Link href={item.href} key={i} className="w-full">
+                {content}
+              </Link>
+            );
+          } else {
+            return (
+              <div key={i} className="w-full" onClick={item.onClick}>
+                {content}
+              </div>
+            );
+          }
+        })}
           </div>
         </div>
       </div>
+      {showAttendanceModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-80">
+            <h2 className="text-lg font-semibold mb-4">Attendance</h2>
+            <p>This is your attendance modal content.</p>
+            <button
+              onClick={() => setShowAttendanceModal(false)}
+              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+       {/* WFH Modal */}
+      {showWFHModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-80">
+            <h2 className="text-lg font-semibold mb-4">WFH Request</h2>
+            <p>This is your WFH request modal content.</p>
+            <button
+              onClick={() => setShowWFHModal(false)}
+              className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
+
+    
   );
 }
