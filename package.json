@@ -6,14 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export"
   },
   "dependencies": {
     "animate.css": "^4.1.1",
+    "dayjs": "^1.11.13",
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
+    "react-select": "^5.10.2",
     "tsparticles": "^3.8.1"
   },
   "devDependencies": {

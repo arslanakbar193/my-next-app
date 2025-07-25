@@ -1,6 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { MdSpaceDashboard } from "react-icons/md";
 import { BsFillFileSpreadsheetFill, BsPersonWorkspace } from "react-icons/bs";
 import { MdOutlineInstallDesktop } from "react-icons/md";
@@ -11,31 +12,15 @@ import { IoMdClose } from "react-icons/io";
 import DashboardCard from "@/app/components/DashboardCard";
 import { FiChevronDown } from "react-icons/fi";
 import { BsFillFileEarmarkSpreadsheetFill } from "react-icons/bs";
+import { BsSendCheck } from "react-icons/bs";
+import TimeSheetCard from "@/app/components/TimeSheetCard";
 
 export default function DashboardLayout({ children }) {
+  const pathname = usePathname();
   const [expanded, setExpanded] = useState(true);
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
   const [profileDropdown, setProfileDropdown] = useState(false);
-  const [activeItem, setActiveItem] = useState("/home");
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
 
-    handleResize(); // set initial screen type
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const toggleSidebar = () => {
-    if (isMobile) {
-      setShowMobileSidebar(!showMobileSidebar);
-    } else {
-      setExpanded(!expanded);
-    }
-  };
   const menuItems = [
     {
       icon: <MdSpaceDashboard size={24} />,
@@ -70,14 +55,14 @@ export default function DashboardLayout({ children }) {
       {/* Mobile Toggle Button */}
       <div className="lg:hidden fixed top-4 left-4 z-50">
         <button
-          onClick={toggleSidebar}
-          className="flex items-center justify-center p-2 rounded-full bg-gradient-to-br from-[#eec398] via-[#ec733a] to-[#f05933] text-white shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none"
+          onClick={() => setExpanded(!expanded)}
+          className="hidden lg:flex items-center justify-center p-2 rounded-full bg-gradient-to-br from-[#eec398] via-[#ec733a] to-[#f05933] text-white shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none"
           title="Toggle Sidebar"
         >
-          {(isMobile && showMobileSidebar) || (!isMobile && expanded) ? (
-            <IoMdClose size={20} />
+          {expanded ? (
+            <IoMdClose size={24} />
           ) : (
-            <HiMenuAlt3 size={20} />
+            <HiMenuAlt3 size={24} style={{ backgroundColor: "#fff" }} />
           )}
         </button>
       </div>
@@ -85,10 +70,10 @@ export default function DashboardLayout({ children }) {
       {/* Sidebar */}
       <aside
         className={`fixed lg:static top-0 left-0 h-full z-40 flex flex-col transition-all duration-300
-    bg-white border-r border-gray-200 shadow-lg
-    ${expanded ? "w-80" : "w-20"} 
-    ${showMobileSidebar ? "translate-x-0 w-20" : "-translate-x-full"} 
-    lg:translate-x-0`}
+  bg-white border-r border-orange-200 shadow-lg
+  ${expanded ? "w-80" : "w-20"} 
+  ${showMobileSidebar ? "translate-x-0" : "-translate-x-full"} 
+  lg:translate-x-0`}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-4">
@@ -97,7 +82,7 @@ export default function DashboardLayout({ children }) {
           </span>
           <button
             onClick={() => setExpanded(!expanded)}
-            className="hidden cursor-pointer lg:flex items-center justify-center p-2 rounded-full bg-gradient-to-br from-[#eec398] via-[#ec733a] to-[#f05933] text-white shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none"
+            className="hidden lg:flex items-center justify-center p-2 rounded-full bg-gradient-to-br from-[#eec398] via-[#ec733a] to-[#f05933] text-white shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none"
             title="Toggle Sidebar"
           >
             {expanded ? <IoMdClose size={20} /> : <HiMenuAlt3 size={20} />}
@@ -117,18 +102,30 @@ export default function DashboardLayout({ children }) {
           <li>
             <Link
               href="/home"
-              className={`flex items-center gap-3 py-2 rounded border  transition ${
-                expanded
-                  ? "px-3 border-orange-100 hover:bg-orange-50"
-                  : "border-none"
+              className={`flex items-center gap-3 py-2 rounded border border-orange-100 hover:bg-orange-50 transition px-3  ${
+                expanded ? "px-3" : ""
+              } ${
+                pathname === "/home"
+                  ? "border border-orange-100 bg-orange-50 "
+                  : ""
               }`}
               onClick={() => setShowMobileSidebar(false)}
             >
-              <div className="p-2 rounded-full bg-orange-100 text-orange-600">
+              <div
+                className={`p-2 rounded-full ${
+                  pathname === "/home"
+                    ? "bg-orange-100 text-orange-600"
+                    : "bg-black text-white"
+                }`}
+              >
                 <MdSpaceDashboard size={24} />
               </div>
               {expanded && (
-                <span className="text-md font-medium text-orange-700">
+                <span
+                  className={`text-md font-medium ${
+                    pathname === "/home" ? "text-orange-700" : "text-gray-500"
+                  }`}
+                >
                   Dashboard
                 </span>
               )}
@@ -147,18 +144,34 @@ export default function DashboardLayout({ children }) {
             <li key={index}>
               <Link
                 href={item.href}
-                className={`flex items-center gap-3 py-2 rounded border border-orange-100 hover:bg-orange-50 transition ${
-                  expanded
-                    ? "px-3 border-orange-100 hover:bg-orange-50"
-                    : "border-none"
+                className={`flex items-center gap-3 py-2 rounded border border-orange-100 hover:bg-orange-50 transition px-3 ${
+                  expanded ? "px-3" : ""
+                } ${
+                  pathname === item.href
+                    ? "border border-orange-100 bg-orange-50"
+                    : ""
                 }`}
                 onClick={() => setShowMobileSidebar(false)}
               >
-                <div className="p-2 rounded-full bg-black text-white">
+                <div
+                  className={`p-2 rounded-full ${
+                    pathname === item.href
+                      ? "bg-orange-100 text-orange-600"
+                      : "bg-black text-white"
+                  }`}
+                >
                   {item.icon}
                 </div>
                 {expanded && (
-                  <span className="text-md text-gray-500">{item.title}</span>
+                  <span
+                    className={`text-md ${
+                      pathname === item.href
+                        ? "text-orange-700"
+                        : "text-gray-500"
+                    }`}
+                  >
+                    {item.title}
+                  </span>
                 )}
               </Link>
             </li>
@@ -168,11 +181,9 @@ export default function DashboardLayout({ children }) {
 
       {/* Main Content */}
       <main className="flex-1 h-screen overflow-y-auto p-6 bg-gray-100">
-        <div className="flex flex-col lg:flex-row items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-6">
           {/* Welcome text */}
-          <h1 className="text-2xl lg:text-left text-center font-semibold text-gray-700 uppercase">
-            Welcome to dashboard
-          </h1>
+          <h1 className="text-2xl font-semibold text-gray-700">TimeSheet</h1>
 
           {/* Profile section */}
           <div className="relative">
@@ -181,8 +192,8 @@ export default function DashboardLayout({ children }) {
               className="flex items-center space-x-2  p-2 rounded  hover:shadow-md transition"
             >
               <img
-                src="/undraw_developer-avatar.svg"
-                className="w-10 h-10 border border-gray-400 rounded-full"
+                src="/profile-pic.svg"
+                className="w-10 h-10 border border-orange-500 rounded-full"
               />
               <span className="font-medium text-gray-700">Arslan Akbar</span>
               <FiChevronDown
@@ -209,7 +220,7 @@ export default function DashboardLayout({ children }) {
             )}
           </div>
         </div>
-        <DashboardCard />
+        <TimeSheetCard />
       </main>
     </div>
   );
