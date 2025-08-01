@@ -14,6 +14,7 @@ import { FiChevronDown } from "react-icons/fi";
 import { BsFillFileEarmarkSpreadsheetFill } from "react-icons/bs";
 import { BsSendCheck } from "react-icons/bs";
 import TimeSheetCard from "@/app/components/TimeSheetCard";
+import AttendanceModule from "@/app/components/attendanceModule";
 
 export default function DashboardLayout({ children }) {
   const pathname = usePathname();
@@ -183,7 +184,7 @@ export default function DashboardLayout({ children }) {
       <main className="flex-1 h-screen overflow-y-auto p-6 bg-gray-100">
         <div className="flex items-center justify-between mb-6">
           {/* Welcome text */}
-          <h1 className="text-2xl font-semibold text-gray-700">Time Logging System</h1>
+          <h1 className="text-2xl font-semibold text-gray-700">Attendance </h1>
 
           {/* Profile section */}
           <div className="relative">
@@ -220,7 +221,7 @@ export default function DashboardLayout({ children }) {
             )}
           </div>
         </div>
-        <TimeSheetCard />
+        <AttendanceModule/>
       </main>
     </div>
   );
