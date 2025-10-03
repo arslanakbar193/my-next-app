@@ -14,7 +14,7 @@ import { FiChevronDown } from "react-icons/fi";
 import { BsFillFileEarmarkSpreadsheetFill } from "react-icons/bs";
 import { BsSendCheck } from "react-icons/bs";
 import TimeSheetCard from "@/app/components/TimeSheetCard";
-import AttendanceModule from "@/app/components/attendanceModule";
+import AttendanceNewModule from "@/app/components/AttendanceNewModule";
 
 export default function DashboardLayout({ children }) {
   const pathname = usePathname();
@@ -94,7 +94,7 @@ export default function DashboardLayout({ children }) {
         <ul className="flex-1 lg:p-4 p-2 space-y-4">
           {/* Section Title - Navigation */}
           {expanded && (
-            <li className="px-3 text-xs uppercase tracking-widest text-gray-400 mt-2">
+            <li className="px-3 text-sm uppercase tracking-widest text-gray-400 mt-2">
               Navigation
             </li>
           )}
@@ -135,7 +135,7 @@ export default function DashboardLayout({ children }) {
 
           {/* Section Title - Pages */}
           {expanded && (
-            <li className="px-3 text-xs uppercase tracking-widest text-gray-400 mt-4">
+            <li className="px-3 text-sm uppercase tracking-widest text-gray-400 mt-4">
               Pages
             </li>
           )}
@@ -193,10 +193,10 @@ export default function DashboardLayout({ children }) {
               className="flex items-center space-x-2  p-2 rounded  hover:shadow-md transition"
             >
               <img
-                src="/profile-pic.svg"
+                src="/undraw_developer-avatar.svg"
                 className="w-10 h-10 border border-gray-500 rounded-full"
               />
-              <span className="font-medium text-gray-700">Arslan Akbar</span>
+              <span className="text-gray-700 rounded-lg">Arslan Akbar</span>
               <FiChevronDown
                 className={`text-gray-500 transform transition-transform duration-200 ${
                   profileDropdown ? "rotate-180" : ""
@@ -221,7 +221,7 @@ export default function DashboardLayout({ children }) {
             )}
           </div>
         </div>
-        <AttendanceModule/>
+        <AttendanceNewModule />
       </main>
     </div>
   );

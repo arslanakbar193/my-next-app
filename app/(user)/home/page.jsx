@@ -108,7 +108,7 @@ export default function DashboardLayout({ children }) {
         <ul className="flex-1 lg:p-4 p-2 space-y-4">
           {/* Section Title - Navigation */}
           {expanded && (
-            <li className="px-3 text-xs uppercase tracking-widest text-gray-400 mt-2">
+            <li className="px-3 text-sm uppercase tracking-widest text-gray-400 mt-2">
               Navigation
             </li>
           )}
@@ -128,16 +128,14 @@ export default function DashboardLayout({ children }) {
                 <MdSpaceDashboard size={24} />
               </div>
               {expanded && (
-                <span className="text-md font-medium text-orange-700">
-                  Dashboard
-                </span>
+                <span className="text-md  text-orange-700">Dashboard</span>
               )}
             </Link>
           </li>
 
           {/* Section Title - Pages */}
           {expanded && (
-            <li className="px-3 text-xs uppercase tracking-widest text-gray-400 mt-4">
+            <li className="px-3 text-sm uppercase tracking-widest text-gray-400 mt-4">
               Pages
             </li>
           )}
@@ -184,7 +182,7 @@ export default function DashboardLayout({ children }) {
                 src="/undraw_developer-avatar.svg"
                 className="w-10 h-10 border border-gray-400 rounded-full"
               />
-              <span className="font-medium text-gray-700">Arslan Akbar</span>
+              <span className=" text-gray-700 rounded-lg">Arslan Akbar</span>
               <FiChevronDown
                 className={`text-gray-500 transform transition-transform duration-200 ${
                   profileDropdown ? "rotate-180" : ""

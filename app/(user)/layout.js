@@ -1,6 +1,6 @@
-import { Poppins } from "next/font/google";
+import { Poppins, Rajdhani } from "next/font/google";
 import "../globals.css";
-import 'animate.css';
+import "animate.css";
 
 // import Navigation from "../components/Navigation";
 
@@ -8,6 +8,11 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"], // Customize as needed
   variable: "--font-poppins",
+});
+const rajdhani = Rajdhani({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-rajdhani",
 });
 
 export const metadata = {
@@ -17,7 +22,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-     <html lang="en" className={poppins.variable}>
+    <html lang="en" className={`${poppins.variable} ${rajdhani.variable}`}>
       <body className="font-poppins overflow-auto">{children}</body>
     </html>
   );

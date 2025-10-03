@@ -120,12 +120,14 @@ export default function Home() {
                       </a>
                     </div>
                     <div className="border-t border-gray-300 my-4"></div>
-                      <div className="flex justify-center mt-10">
-                        <Link href="/home" className="block w-42 text-white py-2 rounded text-center bg-gradient-to-br from-[#eec398] via-[#ec733a] to-[#f05933] hover:bg-orange-400 transition backdrop-blur-md">
-                            Login
-                        </Link>
-                      </div>
-                    
+                    <div className="flex justify-center mt-10">
+                      <Link
+                        href="/home"
+                        className="block w-42 text-white py-2 rounded text-center bg-gradient-to-br from-[#eec398] via-[#ec733a] to-[#f05933] hover:bg-orange-400 transition backdrop-blur-md"
+                      >
+                        Login
+                      </Link>
+                    </div>
                   </form>
                 </div>
               </div>
