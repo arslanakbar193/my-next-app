@@ -65,7 +65,7 @@ export default function DashboardLayout({ children }) {
     {
       icon: <BsPersonWorkspace size={24} />,
       title: "WFH Request",
-      href: "/wfh",
+      href: "/workfromhome",
     },
     { icon: <RiLogoutCircleRLine size={24} />, title: "Logout", href: "/" },
   ];

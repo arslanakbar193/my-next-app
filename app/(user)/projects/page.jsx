@@ -14,7 +14,8 @@ import { FiChevronDown } from "react-icons/fi";
 import { BsFillFileEarmarkSpreadsheetFill } from "react-icons/bs";
 import { BsSendCheck } from "react-icons/bs";
 import TimeSheetCard from "@/app/components/TimeSheetCard";
-import AttendanceNewModule from "@/app/components/AttendanceNewModule";
+import ProjectsModule from "@/app/components/ProjectsModule";
+
 
 export default function DashboardLayout({ children }) {
   const pathname = usePathname();
@@ -221,7 +222,7 @@ export default function DashboardLayout({ children }) {
             )}
           </div>
         </div>
-        <AttendanceNewModule />
+        <ProjectsModule />
       </main>
     </div>
   );

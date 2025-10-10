@@ -13,8 +13,8 @@ import DashboardCard from "@/app/components/DashboardCard";
 import { FiChevronDown } from "react-icons/fi";
 import { BsFillFileEarmarkSpreadsheetFill } from "react-icons/bs";
 import { BsSendCheck } from "react-icons/bs";
-import TimeSheetCard from "@/app/components/TimeSheetCard";
-import AttendanceNewModule from "@/app/components/AttendanceNewModule";
+import Workfromhome from "@/app/components/Workformhome";
+
 
 export default function DashboardLayout({ children }) {
   const pathname = usePathname();
@@ -221,7 +221,7 @@ export default function DashboardLayout({ children }) {
             )}
           </div>
         </div>
-        <AttendanceNewModule />
+        <Workfromhome />
       </main>
     </div>
   );
